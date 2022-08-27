@@ -13,7 +13,7 @@ bool read_string (Equation *coef, FILE *file)
 void release_output (FILE *f_output, Roots *roots, int number_of_equation)
 {
     assert (isfinite(number_of_equation));
-    assert (f_output != nullptr);
+    assert (f_output != NULL);
     assert (roots != NULL);
 
     fprintf (f_output, "solution(s) of equation %d:  ", number_of_equation + 1);

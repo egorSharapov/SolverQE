@@ -2,9 +2,9 @@
 
 bool read_string_test (Equation *coef, Test_roots *test_roots, FILE *file, char  *name)
 {
-    assert (coef != nullptr);
-    assert (file != nullptr);
-    assert (name != nullptr);
+    assert (coef != NULL);
+    assert (file != NULL);
+    assert (name != NULL);
 
     int count_of_input = fscanf (file, "%lg %lg %lg ", &(coef->a), &(coef->b), &(coef->c));
     
