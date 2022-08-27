@@ -8,7 +8,7 @@ In docs folder
 The program has two modes of operation: test and release.
 In test mode, the program opens the files specified in the arguments and reads the coefficients of the quadratic equation and the pre-recorded solutions, after which it outputs the test results to the output file. Example of input file:
 
-
+![изображение](https://user-images.githubusercontent.com/111515657/187025151-0da0f7e0-40e6-4461-b230-8be7d8e350c9.png)
 
 The first string indicates the number of quadratic equations
 The following strings indicate the coefficients and roots of the quadratic equation in the format: a b c count_of_roots x1 x2
