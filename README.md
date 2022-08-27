@@ -1,5 +1,4 @@
-# SolverQE
-# solve the quadratic equations
+# **solve the quadratic equations**
 ---
 ### documentation
 In docs folder
