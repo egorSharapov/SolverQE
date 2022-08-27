@@ -145,9 +145,9 @@ int check_extension (char *file_name, const char *extension)
 {
     char *last_word = strchr(file_name, '.')+1;
 
-    if (strstr(last_word, extension)==NULL)
-        return ERROR;
-    else
+    if (strstr(last_word, extension))
         return SUCCESS;
+    else
+        return ERROR;
 }
 
