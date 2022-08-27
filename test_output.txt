@@ -1,0 +1,7 @@
+test of equation 1: success! 
+test of equation 2: success! 
+test of equation 3: success! 
+test of equation 4: success! 
+test of equation 5: success! 
+test of equation 6: success! 
+test of equation 7: success! 
