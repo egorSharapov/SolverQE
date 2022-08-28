@@ -14,7 +14,7 @@ void release_output (FILE *f_output, Roots *roots, int number_of_equation)
 {
     assert (isfinite(number_of_equation));
     assert (f_output != NULL);
-    assert (roots != NULL);
+    assert (roots    != NULL);
 
     fprintf (f_output, "solution(s) of equation %d:  ", number_of_equation + 1);
                 
@@ -22,23 +22,29 @@ void release_output (FILE *f_output, Roots *roots, int number_of_equation)
     {
         case ZERO_ROOTS:
             fprintf (f_output, "no solutions \n");
-            break;  
+            break;
+
         case ONE_ROOT:
             fprintf (f_output, "x = %lg \n", roots->x1);
             break;
+
         case TWO_ROOTS:
             fprintf (f_output, "x1 = %lg x2 = %lg \n", roots->x1, roots->x2);
             break;
+
         case INF_ROOTS:
             fprintf (f_output, "infinity solutions \n");
             break;
+
         default:
             fprintf (f_output, "incorrect input \n");
+            break;
     }
 }
 
 void solve (Equation *coef, Roots *roots)
 {
+    assert (coef  != NULL);
     assert (roots != NULL);
     assert (isfinite(coef->a));
     assert (isfinite(coef->b));
@@ -66,6 +72,7 @@ bool is_zero (double number_1, double number_2)
 
 void quadratic (Equation *coef, Roots *roots)
 {      
+    assert (coef  != NULL);
     assert (roots != NULL);
     assert (isfinite(coef->a));
     assert (isfinite(coef->b));
@@ -79,7 +86,10 @@ void quadratic (Equation *coef, Roots *roots)
     }
     else if (is_zero(D, 0))
     {
-        roots->x1 = -coef->b / (2 * coef->a);
+        roots->x1 = -coef->b / (2 * coef->a); 
+        
+        if (is_zero(roots->x1, 0)) roots->x1 = 0;
+        
         roots->count_of_roots = ONE_ROOT;
     }
     else 
@@ -88,6 +98,9 @@ void quadratic (Equation *coef, Roots *roots)
         
         roots->x1 = (-coef->b + D) / (2 * coef->a);
         roots->x2 = (-coef->b - D) / (2 * coef->a);
+
+        if (is_zero(roots->x1, 0)) roots->x1 = 0;
+        if (is_zero(roots->x2, 0)) roots->x2 = 0;
         
         roots->count_of_roots = TWO_ROOTS;
     } 
@@ -97,7 +110,8 @@ void quadratic (Equation *coef, Roots *roots)
 
 void linear (Equation *coef, Roots *roots)
 {
-    assert (roots != nullptr);
+    assert (coef  != NULL);
+    assert (roots != NULL);
     assert (isfinite(coef->a));
     assert (isfinite(coef->b));
     assert (isfinite(coef->c));
@@ -106,13 +120,12 @@ void linear (Equation *coef, Roots *roots)
     {
         roots->count_of_roots = INF_ROOTS;
     }
-    else if (is_zero(coef->c, 0))
-    {
-        roots->count_of_roots = ZERO_ROOTS;
-    }
     else
     {
         roots->x1 = -coef->c / coef->b;
+    
+        if (is_zero(roots->x1, 0)) roots->x1 = 0;
+
         roots->count_of_roots = ONE_ROOT;
     }
 }
@@ -132,6 +145,11 @@ bool check_param (int argc, char *first_arg, char *second_arg)
                "example: \\.prog input_file.txt output_file.txt\n\n");
         return FALL;
     }
+    else if (first_arg == second_arg)
+    {
+        printf ("names of input and output files are similar");
+        return FALL;
+    }
     else if (check_extension(first_arg, "txt") ==  ERROR or check_extension(second_arg, "txt") ==  ERROR)
     {
         printf ("files should have the .txt extension");
@@ -143,9 +161,9 @@ bool check_param (int argc, char *first_arg, char *second_arg)
 
 int check_extension (char *file_name, const char *extension)
 {
-    char *last_word = strchr(file_name, '.')+1;
+    char *last_word = strchr(file_name, '.') + 1;
 
-    if (strstr(last_word, extension))
+    if (strcmp (last_word, extension) == 0)
         return SUCCESS;
     else
         return ERROR;
