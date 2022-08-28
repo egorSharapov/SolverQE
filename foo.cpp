@@ -1,5 +1,6 @@
 #include "foo.hpp"
 
+
 bool read_string (Equation *coef, FILE *file)
 {
     assert (coef != NULL);
@@ -9,6 +10,7 @@ bool read_string (Equation *coef, FILE *file)
     
     return (count_of_input == INPUT_ERROR);
 }
+
 
 void release_output (FILE *f_output, Roots *roots, int number_of_equation)
 {
@@ -42,6 +44,7 @@ void release_output (FILE *f_output, Roots *roots, int number_of_equation)
     }
 }
 
+
 void solve (Equation *coef, Roots *roots)
 {
     assert (coef  != NULL);
@@ -59,6 +62,7 @@ void solve (Equation *coef, Roots *roots)
         quadratic (coef, roots);
     }
 }
+
 
 bool is_zero (double number_1, double number_2)
 {
@@ -145,7 +149,7 @@ bool check_param (int argc, char *first_arg, char *second_arg)
                "example: \\.prog input_file.txt output_file.txt\n\n");
         return FALL;
     }
-    else if (first_arg == second_arg)
+    else if (*first_arg == *second_arg)
     {
         printf ("names of input and output files are similar");
         return FALL;

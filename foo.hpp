@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <string.h>
 /**
  * @file main.cpp
  * @author snake_eyes
@@ -11,6 +9,8 @@
  * 
  */
 
+#include <stdio.h>
+#include <string.h>
 #include <math.h>
 #include <float.h>
 #include <assert.h>
@@ -37,12 +37,12 @@ enum NUM_ROOTS
  */
 enum ERRORS_CODE 
 {
-    COUNT_EQ_ERROR  = 42,  ///< error count of eqations in input file
-    OPEN_FILE_ERROR = 420, ///< error of open file
-    INPUT_ERROR     = 3,   ///< incorrect input error
+    ERROR           = -1,
     FALL            = 0,
-    SUCCESS         = 1,   
-    ERROR           = -1            
+    SUCCESS         = 1, 
+    INPUT_ERROR     = 3, ///< incorrect input error  
+    OPEN_FILE_ERROR = 4, ///< error of open file
+    COUNT_EQ_ERROR  = 5, ///< error count of eqations in input file
 };
 
 
